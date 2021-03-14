@@ -14,6 +14,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 find_package(Qt5 COMPONENTS Widgets LinguistTools REQUIRED)
+find_package(LibAV REQUIRED)
 
 set(TS_FILES
   translations/en.ts
@@ -35,6 +36,9 @@ add_executable(${PROJECT_NAME}
   ${TS_FILES}
 )
 
-target_link_libraries(${PROJECT_NAME} PRIVATE avutil avformat avcodec Qt5::Widgets)
+include_directories(${LIBAV_INCLUDE_DIR})
+
+
+target_link_libraries(${PROJECT_NAME} PRIVATE ${LIBAV_LIBRARIES} Qt5::Widgets)
 
 qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})

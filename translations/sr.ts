@@ -4,10 +4,6 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <source>MainWindow</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>PiTV Klient</source>
         <translation type="unfinished">ПајТВ Клијент</translation>
     </message>
@@ -25,7 +21,7 @@
     </message>
     <message>
         <source>Address of PiTV</source>
-        <translation type="unfinished">Адреса ПајТВ-а</translation>
+        <translation type="obsolete">Адреса ПајТВ-а</translation>
     </message>
     <message>
         <source>Open movie</source>
@@ -34,6 +30,26 @@
     <message>
         <source>Movie files (*.mp4 *.avi *.mov);; All files (*.*)</source>
         <translation type="unfinished">Датотеке филма (*.mp4 *.avi *.mov);; Све датотеке (*.*)</translation>
+    </message>
+    <message>
+        <source>IP Address of PiTV</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File doesn&apos;t exist.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File doesn&apos;t exist. Please enter valid path.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stream failed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stream exited with status code 1.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
