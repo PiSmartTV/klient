@@ -16,7 +16,7 @@ jobs:
     - name: Create Build Environment
       run: cmake -E make_directory ${{github.workspace}}/build
     - name: Install dependencies
-      run: sudo apt update && sudo apt install qt5-default libav-tools qttools5-dev-tools qttools5-dev
+      run: sudo apt update && sudo apt install qt5-default ffmpeg qttools5-dev-tools qttools5-dev
     - name: Configure CMake
       shell: bash
       working-directory: ${{github.workspace}}/build
