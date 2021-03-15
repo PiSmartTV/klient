@@ -1,5 +1,7 @@
 #include "stream.h"
 
+#undef av_err2str
+
 static void log_packet(const AVFormatContext *fmt_ctx, const AVPacket *pkt, const char *tag)
 {
     AVRational *time_base = &fmt_ctx->streams[pkt->stream_index]->time_base;
@@ -12,6 +14,14 @@ static void log_packet(const AVFormatContext *fmt_ctx, const AVPacket *pkt, cons
     //        pkt->stream_index);
 }
 
+char *av_err2str(int ret) {
+    char *error_buf = (char *)malloc(AV_ERROR_MAX_STRING_SIZE);
+
+    av_make_error_string(error_buf, AV_ERROR_MAX_STRING_SIZE, ret);
+
+    return error_buf;
+}
+
 int stream(const QString &address, const QString &file)
 {
     AVOutputFormat *ofmt = av_guess_format("mpegts", NULL, NULL);
@@ -22,6 +32,8 @@ int stream(const QString &address, const QString &file)
     int stream_index = 0;
     int *stream_mapping = NULL;
     int stream_mapping_size = 0;
+
+    printf("CODEC: %d\n", ofmt->video_codec);
 
     in_filename = file.toUtf8().constData();
     out_filename = address.toUtf8().constData();
@@ -160,9 +172,7 @@ end:
 
     if (ret < 0 && ret != AVERROR_EOF)
     {
-        char *error_buf = (char *)malloc(AV_ERROR_MAX_STRING_SIZE);
-
-        fprintf(stderr, "Error occurred: %s\n", av_make_error_string(error_buf, AV_ERROR_MAX_STRING_SIZE, ret));
+        fprintf(stderr, "Error occurred: %s\n", av_err2str(ret));
         return 1;
     }
 

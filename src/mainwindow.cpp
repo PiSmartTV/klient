@@ -33,10 +33,20 @@ void MainWindow::on_playButton_clicked()
     QString filename = this->fileLineEdit->text();
     QString address = this->addressLineEdit->text();
 
+    // Checking if filepath exists
     if (!QFile::exists(filename)) {
         QMessageBox::critical(this, tr("File doesn't exist."), tr("File doesn't exist. Please enter valid path."), QMessageBox::Ok);
+        return;
     }
-    // TODO: Validate IP address
+
+    // Checking if IPv4 is valid
+    QString ipRange = "(?:[0-1]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])";
+    QString ipPattern = QString("^%1\\.%1\\.%1\\.%1$").arg(ipRange);
+    QRegExp ipRegex(ipPattern);
+    if(!ipRegex.exactMatch(address)) {
+        QMessageBox::critical(this, tr("IP address is invalid."), tr("IP address is not valid. Please enter valid IP address."), QMessageBox::Ok);
+        return;
+    }
 
     QString output = QString("udp://%1:23000").arg(address);
 

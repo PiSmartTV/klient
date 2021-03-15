@@ -51,5 +51,13 @@
         <source>Stream exited with status code 1.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>IP address is invalid.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>IP address is not valid. Please enter valid IP address.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>
