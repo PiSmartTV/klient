@@ -16,10 +16,10 @@ jobs:
     - name: Create Build Environment
       run: cmake -E make_directory ${{github.workspace}}/build
     - name: Install dependencies (linux)
-      if: ${{ runner.os }} == "ubuntu-latest"
+      if: runner.os == "ubuntu-latest"
       run: sudo apt update && sudo apt install qt5-default libavformat-dev libavcodec-dev libavutil-dev qttools5-dev-tools qttools5-dev
     - name: Install dependencies (Windows)
-      if: ${{ runner.os }} == "windows-latest"
+      if: runner.os == "windows-latest"
       run: vcpkg install ffmpeg && choco install qt-sdk
       shell: bash
     - name: Configure CMake
