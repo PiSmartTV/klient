@@ -15,12 +15,16 @@ jobs:
     - uses: actions/checkout@v2
     - name: Create Build Environment
       run: cmake -E make_directory ${{github.workspace}}/build
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v2
+      with:
+        host: runner.os
     - name: Install dependencies (linux)
       if: runner.os == 'Linux'
-      run: sudo apt update && sudo apt install qt5-default libavformat-dev libavcodec-dev libavutil-dev qttools5-dev-tools qttools5-dev
+      run: sudo apt update && sudo apt install libavformat-dev libavcodec-dev libavutil-dev
     - name: Install dependencies (Windows)
       if: runner.os == 'Windows'
-      run: vcpkg install ffmpeg && choco install qt-sdk
+      run: vcpkg install ffmpeg
       shell: bash
     - name: Configure CMake
       shell: bash
