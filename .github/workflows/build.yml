@@ -18,7 +18,7 @@ jobs:
     - name: Install Qt
       uses: jurplel/install-qt-action@v2
       with:
-        host: runner.os
+        host: ${{ runner.os }}
     - name: Install dependencies (linux)
       if: runner.os == 'Linux'
       run: sudo apt update && sudo apt install libavformat-dev libavcodec-dev libavutil-dev
