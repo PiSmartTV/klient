@@ -49,7 +49,7 @@ jobs:
       shell: bash
     - name: List directories (debug)
       shell: bash
-      run: ls "C:\Program Files\FFmpeg"
+      run: ls "C:\Program Files\FFmpeg\lib"
     - name: Configure CMake
       shell: bash
       working-directory: ${{github.workspace}}/build
