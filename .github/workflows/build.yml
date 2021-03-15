@@ -47,9 +47,6 @@ jobs:
       if: steps.ffmpeg-cache.outputs.cache-hit != 'true'
       run: choco install ffmpeg-shared
       shell: bash
-    - name: List directories (debug)
-      shell: bash
-      run: ls "C:\Program Files\FFmpeg\lib"
     - name: Configure CMake
       shell: bash
       working-directory: ${{github.workspace}}/build
