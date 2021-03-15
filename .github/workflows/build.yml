@@ -22,7 +22,7 @@ jobs:
       run: sudo apt update && sudo apt install libavformat-dev libavcodec-dev libavutil-dev
     - name: Install dependencies (Windows)
       if: runner.os == 'Windows'
-      run: vcpkg install ffmpeg
+      run: choco install ffmpeg-shared
       shell: bash
     - name: Configure CMake
       shell: bash
