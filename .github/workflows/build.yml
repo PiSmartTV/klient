@@ -28,7 +28,9 @@ jobs:
         path: "C:\\Program Files\\FFmpeg"
         key: ffmpeg-cache-key
     - name: Install dependencies (Windows)
-      if: runner.os == 'Windows' and steps.ffmpeg-cache.outputs.cache-hit != 'true'
+      if: | 
+        runner.os == 'Windows'
+        steps.ffmpeg-cache.outputs.cache-hit != 'true'
       run: choco install ffmpeg-shared
       shell: bash
     - name: Configure CMake
