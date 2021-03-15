@@ -6,8 +6,8 @@ env:
   BUILD_TYPE: Release
 
 jobs:
-  linux:
-    runs-on: linux-build
+  linux-build:
+    runs-on: linux-latest
     steps: 
     - uses: actions/checkout@v2
     - name: Create Build Environment
@@ -29,8 +29,8 @@ jobs:
       with:
         name: ${{ runner.os }}
         path: build/klient
-  windows:
-    runs-on: windows-build
+  windows-build:
+    runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
     - name: Create Build Environment
@@ -43,7 +43,7 @@ jobs:
       with:
         path: "C:\\Program Files\\FFmpeg"
         key: ffmpeg-cache-key
-    - name: Install dependencies (Windows)
+    - name: Install dependencies
       if: steps.ffmpeg-cache.outputs.cache-hit != 'true'
       run: choco install ffmpeg-shared
       shell: bash
