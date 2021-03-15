@@ -42,7 +42,6 @@ jobs:
       uses: actions/cache@v2
       with:
         path: "C:\\Program Files\\FFmpeg"
-        key: ffmpeg-cache-key
     - name: Install dependencies
       if: steps.ffmpeg-cache.outputs.cache-hit != 'true'
       run: choco install ffmpeg-shared

@@ -48,6 +48,12 @@ find_library(
   HINTS "C:\\Program Files\\FFmpeg\\lib"
 )
 
+if(WIN32)
+  if(EXISTS "C:\\Program Files\\FFmpeg")
+    include_directories("C:\\Program Files\\FFmpeg\\include")
+  endif()
+endif()
+
 target_link_libraries(${PROJECT_NAME} PRIVATE ${LIBAVCODEC_LIBRARY} ${LIBAVFORMAT_LIBRARY} ${LIBAVUTIL_LIBRARY} Qt5::Widgets)
 
 qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
