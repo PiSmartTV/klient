@@ -9,13 +9,14 @@ jobs:
   build:
     strategy:
       matrix:
-        platform: [ubuntu-latest]
+        platform: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.platform }}
     steps:
     - uses: actions/checkout@v2
     - name: Create Build Environment
       run: cmake -E make_directory ${{github.workspace}}/build
-    - name: Install dependencies
+    - name: Install dependencies (linux)
+      if: ${{ matrix.platform }} == "ubuntu-latest"
       run: sudo apt update && sudo apt install qt5-default libavformat-dev libavcodec-dev libavutil-dev libavdevice-dev libavfilter-dev libswscale-dev libavresample-dev qttools5-dev-tools qttools5-dev
     - name: Configure CMake
       shell: bash
@@ -25,9 +26,10 @@ jobs:
       working-directory: ${{github.workspace}}/build
       shell: bash
       run: cmake --build . --config $BUILD_TYPE
-    - name: Archive production artifacts
+    - name: Linux artifact
+      if: ${{ matrix.platform }} == "ubuntu-latest"
       uses: actions/upload-artifact@v2
       with:
-        name: cmake build
+        name: linux
         path: build/klient
 
