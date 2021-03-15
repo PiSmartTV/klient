@@ -35,9 +35,18 @@ add_executable(${PROJECT_NAME}
   ${TS_FILES}
 )
 
-find_library(LIBAVCODEC_LIBRARY avcodec)
-find_library(LIBAVFORMAT_LIBRARY avformat)
-find_library(LIBAVUTIL_LIBRARY avutil)
+find_library(
+  LIBAVCODEC_LIBRARY avcodec
+  HINTS "C:\\Program Files\\FFmpeg\\lib"
+)
+find_library(
+  LIBAVFORMAT_LIBRARY avformat
+  HINTS "C:\\Program Files\\FFmpeg\\lib"
+)
+find_library(
+  LIBAVUTIL_LIBRARY avutil
+  HINTS "C:\\Program Files\\FFmpeg\\lib"
+)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE ${LIBAVCODEC_LIBRARY} ${LIBAVFORMAT_LIBRARY} ${LIBAVUTIL_LIBRARY} Qt5::Widgets)
 
