@@ -35,27 +35,23 @@ add_executable(${PROJECT_NAME}
   ${TS_FILES}
 )
 
-if(WIN32)
-  find_library(
-    LIBAVCODEC_LIBRARY libavcodec.a
-    HINTS "C:\\Program Files\\FFmpeg\\lib"
-  )
-  find_library(
-    LIBAVFORMAT_LIBRARY libavformat.a
-    HINTS "C:\\Program Files\\FFmpeg\\lib"
-  )
-  find_library(
-    LIBAVUTIL_LIBRARY libavutil.a
-    HINTS "C:\\Program Files\\FFmpeg\\lib"
-  )
+find_library(
+  LIBAVCODEC_LIBRARY avcodec
+  HINTS "C:\\Program Files\\FFmpeg\\lib"
+)
+find_library(
+  LIBAVFORMAT_LIBRARY avformat
+  HINTS "C:\\Program Files\\FFmpeg\\lib"
+)
+find_library(
+  LIBAVUTIL_LIBRARY avutil
+  HINTS "C:\\Program Files\\FFmpeg\\lib"
+)
 
+if(WIN32)
   if(EXISTS "C:\\Program Files\\FFmpeg")
     include_directories("C:\\Program Files\\FFmpeg\\include")
   endif()
-else()
-  find_library(LIBAVCODEC_LIBRARY avcodec)
-  find_library(LIBAVFORMAT_LIBRARY avformat)
-  find_library(LIBAVUTIL_LIBRARY avutil)
 endif()
 
 target_link_libraries(${PROJECT_NAME} PRIVATE ${LIBAVCODEC_LIBRARY} ${LIBAVFORMAT_LIBRARY} ${LIBAVUTIL_LIBRARY} Qt5::Widgets)
