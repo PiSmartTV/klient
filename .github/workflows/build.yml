@@ -16,8 +16,12 @@ jobs:
     - name: Create Build Environment
       run: cmake -E make_directory ${{github.workspace}}/build
     - name: Install dependencies (linux)
-      if: ${{ matrix.platform }} == "ubuntu-latest"
-      run: sudo apt update && sudo apt install qt5-default libavformat-dev libavcodec-dev libavutil-dev libavdevice-dev libavfilter-dev libswscale-dev libavresample-dev qttools5-dev-tools qttools5-dev
+      if: ${{ runner.os }} == "ubuntu-latest"
+      run: sudo apt update && sudo apt install qt5-default libavformat-dev libavcodec-dev libavutil-dev qttools5-dev-tools qttools5-dev
+    - name: Install dependencies (Windows)
+      if: ${{ runner.os }} == "windows-latest"
+      run: vcpkg install ffmpeg && choco install qt-sdk
+      shell: bash
     - name: Configure CMake
       shell: bash
       working-directory: ${{github.workspace}}/build
@@ -27,9 +31,8 @@ jobs:
       shell: bash
       run: cmake --build . --config $BUILD_TYPE
     - name: Linux artifact
-      if: ${{ matrix.platform }} == "ubuntu-latest"
       uses: actions/upload-artifact@v2
       with:
-        name: linux
+        name: ${{ runner.os }}
         path: build/klient
 
