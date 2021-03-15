@@ -24,7 +24,7 @@ jobs:
       working-directory: ${{github.workspace}}/build
       shell: bash
       run: cmake --build . --config $BUILD_TYPE
-    - name: Linux artifact
+    - name: artifact
       uses: actions/upload-artifact@v2
       with:
         name: ${{ runner.os }}
@@ -55,9 +55,9 @@ jobs:
       working-directory: ${{github.workspace}}/build
       shell: bash
       run: cmake --build . --config $BUILD_TYPE
-    - name: Linux artifact
+    - name: artifact
       uses: actions/upload-artifact@v2
       with:
         name: ${{ runner.os }}
-        path: build/klient
+        path: build/Release/klient.exe
 
