@@ -57,6 +57,7 @@ jobs:
       run: cmake --build . --config $BUILD_TYPE
     - name: CPack
       run: cpack
+      working-directory: ${{github.workspace}}/build
     - name: artifact
       uses: actions/upload-artifact@v2
       with:
