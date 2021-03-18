@@ -6,9 +6,8 @@ GUI client for PiTV to stream video
 - LibAV
 
 ## Using prebuilt binaries
-- go to the https://github.com/PiSmartTV/klient/actions
-- go to the latest build
-- scroll down and download artifact for your OS
+- go to the https://nightly.link/PiSmartTV/klient/workflows/build/master
+- click on the link for your OS
 
 ## Building from source
 
