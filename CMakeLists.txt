@@ -101,6 +101,7 @@ if(WIN32)
   install(FILES "C:/Program Files/FFmpeg/bin/avcodec-58.dll" DESTINATION .)
   install(FILES "C:/Program Files/FFmpeg/bin/avutil-56.dll" DESTINATION .)
   install(FILES "C:/Program Files/FFmpeg/bin/avformat-58.dll" DESTINATION .)
+  install(FILES "C:/Program Files/FFmpeg/bin/swresample-3.dll" DESTINATION .)
 elseif(APPLE)
   # MacOS is not currently supported
   set(CPACK_GENERATOR DragNDrop)
