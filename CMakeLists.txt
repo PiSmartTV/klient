@@ -13,6 +13,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
+set(FFMPEG_BREW_VERSION "4.3.2_1")
+
 find_package(Qt5 COMPONENTS Widgets LinguistTools REQUIRED)
 
 set(TS_FILES
@@ -58,9 +60,13 @@ if(WIN32)
     include_directories("C:\\Program Files\\FFmpeg\\include")
   endif()
 else()
-  find_library(LIBAVCODEC_LIBRARY avcodec REQUIRED)
-  find_library(LIBAVFORMAT_LIBRARY avformat REQUIRED)
-  find_library(LIBAVUTIL_LIBRARY avutil REQUIRED)
+  find_library(LIBAVCODEC_LIBRARY avcodec HINTS "/usr/local/Cellar/ffmpeg/${FFMPEG_BREW_VERSION}/lib/" REQUIRED)
+  find_library(LIBAVFORMAT_LIBRARY avformat HINTS "/usr/local/Cellar/ffmpeg/${FFMPEG_BREW_VERSION}/lib" REQUIRED)
+  find_library(LIBAVUTIL_LIBRARY avutil HINTS "/usr/local/Cellar/ffmpeg/${FFMPEG_BREW_VERSION}/lib" REQUIRED)
+endif()
+
+if(APPLE)
+  include_directories("/usr/local/Cellar/ffmpeg/${FFMPEG_BREW_VERSION}/include")
 endif()
 
 target_link_libraries(${PROJECT_NAME} PRIVATE ${LIBAVCODEC_LIBRARY} ${LIBAVFORMAT_LIBRARY} ${LIBAVUTIL_LIBRARY} Qt5::Widgets)
