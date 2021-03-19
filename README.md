@@ -42,3 +42,32 @@ cd build
 cmake ..
 make -j2
 ```
+
+### Windows
+
+Install FFmpeg from their website or chocolatey.
+Install Qt SDK (Online installer) from Qt's website.
+Open QtCreator and build.
+
+To package installer NSIS is required.
+
+### MacOS (WIP)
+Firstly, you have to install homebrew.
+
+Install dependencies:
+```
+brew install qt@5 ffmpeg cmake
+```
+
+Then configure the project:
+```
+mkdir build && cd build
+cmake ..
+```
+
+Finally, build:
+```
+make
+```
+
+CPack is still in progress

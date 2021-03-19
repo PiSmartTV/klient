@@ -11,7 +11,7 @@ jobs:
     steps: 
     - uses: actions/checkout@v2
     - name: Create Build Environment
-      run: cmake -E make_directory --release ${{github.workspace}}/build
+      run: cmake -E make_directory ${{github.workspace}}/build
     - name: Install Qt
       uses: jurplel/install-qt-action@v2
     - name: Install dependencies
@@ -34,7 +34,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Create Build Environment
-      run: cmake -E make_directory --release ${{github.workspace}}/build
+      run: cmake -E make_directory ${{github.workspace}}/build
     - name: Install Qt
       uses: jurplel/install-qt-action@v2
     - name: Cache windows libs
@@ -63,4 +63,33 @@ jobs:
       with:
         name: ${{ runner.os }}
         path: build/_CPack_Packages/win64/NSIS/*.exe
-
+  macos-build:
+    runs-on: macos-latest
+    steps: 
+    - uses: actions/checkout@v2
+    - name: Create Build Environment
+      run: cmake -E make_directory ${{github.workspace}}/build
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v2
+    - name: Cache libs
+      id: ffmpeg-cache
+      uses: actions/cache@v2
+      with:
+        path: "/usr/local/Cellar"
+        key: ffmpeg-cache-key
+    - name: Install dependencies
+      if: steps.ffmpeg-cache.outputs.cache-hit != 'true'
+      run: brew install ffmpeg
+    - name: Configure CMake
+      shell: bash
+      working-directory: ${{github.workspace}}/build
+      run: cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=$BUILD_TYPE
+    - name: Build
+      working-directory: ${{github.workspace}}/build
+      shell: bash
+      run: cmake --build . --config $BUILD_TYPE
+    - name: artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{ runner.os }}
+        path: build/klient
