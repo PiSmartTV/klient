@@ -43,3 +43,9 @@ cd build
 cmake ..
 make -j2
 ```
+
+### Windows
+
+Install FFmpeg from their website or chocolatey.
+Install Qt SDK (Online installer) from Qt's website.
+Open QtCreator and build.
