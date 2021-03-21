@@ -38,7 +38,7 @@ add_executable(${PROJECT_NAME}
   ${UI_FILES}
   ${TS_FILES}
 )
-else if(APPLE)
+elseif(APPLE)
 add_executable(${PROJECT_NAME}
   MACOSX_BUNDLE
   src/main.cpp
@@ -134,8 +134,7 @@ if(WIN32)
   install(FILES "C:/Program Files/FFmpeg/bin/avformat-58.dll" DESTINATION .)
   install(FILES "C:/Program Files/FFmpeg/bin/swresample-3.dll" DESTINATION .)
 elseif(APPLE)
-  # MacOS is not currently supported
-  set(CPACK_GENERATOR DragNDrop)
+  set(CPACK_GENERATOR Bundle)
 elseif(UNIX)
   set(CPACK_GENERATOR DEB)
 endif()
