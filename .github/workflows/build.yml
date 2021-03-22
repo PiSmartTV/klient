@@ -95,4 +95,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: ${{ runner.os }}
-        path: build/klient.dmg
+        path: build/klient-1.0.0-Darwin.dmg
