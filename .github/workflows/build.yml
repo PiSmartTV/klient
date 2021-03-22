@@ -71,14 +71,7 @@ jobs:
       run: cmake -E make_directory ${{github.workspace}}/build
     - name: Install Qt
       uses: jurplel/install-qt-action@v2
-    - name: Cache libs
-      id: ffmpeg-cache
-      uses: actions/cache@v2
-      with:
-        path: "/usr/local/Cellar"
-        key: ffmpeg-cache-key
     - name: Install dependencies
-      if: steps.ffmpeg-cache.outputs.cache-hit != 'true'
       run: brew install ffmpeg
     - name: Configure CMake
       shell: bash
