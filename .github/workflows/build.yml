@@ -88,8 +88,11 @@ jobs:
       working-directory: ${{github.workspace}}/build
       shell: bash
       run: cmake --build . --config $BUILD_TYPE
+    - name: CPack
+      run: cpack
+      working-directory: ${{github.workspace}}/build
     - name: artifact
       uses: actions/upload-artifact@v2
       with:
         name: ${{ runner.os }}
-        path: build/klient
+        path: build/klient.dmg

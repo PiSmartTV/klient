@@ -63,6 +63,8 @@ else()
   find_library(LIBAVCODEC_LIBRARY avcodec HINTS "/usr/local/Cellar/ffmpeg/${FFMPEG_BREW_VERSION}/lib/" REQUIRED)
   find_library(LIBAVFORMAT_LIBRARY avformat HINTS "/usr/local/Cellar/ffmpeg/${FFMPEG_BREW_VERSION}/lib" REQUIRED)
   find_library(LIBAVUTIL_LIBRARY avutil HINTS "/usr/local/Cellar/ffmpeg/${FFMPEG_BREW_VERSION}/lib" REQUIRED)
+
+  message("-- ${LIBAVUTIL_LIBRARY}")
 endif()
 
 if(APPLE)
@@ -100,7 +102,7 @@ if(WIN32)
   ")
 
   if(NOT TOOL_WINDEPLOYQT AND NOT TOOL_WINDEPLOYQT_DEBUG)
-          message(FATAL_ERROR "Could not find windeployqt")
+    message(FATAL_ERROR "Could not find windeployqt")
   endif()
 
   # Find better way to do this
@@ -109,8 +111,18 @@ if(WIN32)
   install(FILES "C:/Program Files/FFmpeg/bin/avformat-58.dll" DESTINATION .)
   install(FILES "C:/Program Files/FFmpeg/bin/swresample-3.dll" DESTINATION .)
 elseif(APPLE)
-  # MacOS is not currently supported
   set(CPACK_GENERATOR DragNDrop)
+
+  install(TARGETS ${PROJECT_NAME} BUNDLE DESTINATION .)
+
+  install(CODE 
+    "execute_process(COMMAND \"macdeployqt\" -verbose=2)"
+  )
+
+  install(FILES "/usr/local/Cellar/ffmpeg/${FFMPEG_BREW_VERSION}/lib/libavutil.so" DESTINATION "./${PROJECT_NAME}.app/Contents/Resources")
+  install(FILES "/usr/local/Cellar/ffmpeg/${FFMPEG_BREW_VERSION}/lib/libavformat.so" DESTINATION "./${PROJECT_NAME}.app/Contents/Resources")
+  install(FILES "/usr/local/Cellar/ffmpeg/${FFMPEG_BREW_VERSION}/lib/libavcodec.so" DESTINATION "./${PROJECT_NAME}.app/Contents/Resources")
+  install(FILES "/usr/local/Cellar/ffmpeg/${FFMPEG_BREW_VERSION}/lib/libswresample.so" DESTINATION "./${PROJECT_NAME}.app/Contents/Resources")
 elseif(UNIX)
   set(CPACK_GENERATOR DEB)
 endif()
