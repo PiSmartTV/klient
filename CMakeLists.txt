@@ -26,6 +26,31 @@ set(UI_FILES
   ui/mainwindow.ui
 )
 
+if(WIN32)
+add_executable(${PROJECT_NAME}
+  WIN32
+  src/main.cpp
+  src/mainwindow.cpp
+  src/mainwindow.h
+  src/stream.cpp
+  src/stream.h
+
+  ${UI_FILES}
+  ${TS_FILES}
+)
+elseif(APPLE)
+add_executable(${PROJECT_NAME}
+  MACOSX_BUNDLE
+  src/main.cpp
+  src/mainwindow.cpp
+  src/mainwindow.h
+  src/stream.cpp
+  src/stream.h
+
+  ${UI_FILES}
+  ${TS_FILES}
+)
+else()
 add_executable(${PROJECT_NAME}
   src/main.cpp
   src/mainwindow.cpp
@@ -36,7 +61,7 @@ add_executable(${PROJECT_NAME}
   ${UI_FILES}
   ${TS_FILES}
 )
-
+endif()
 
 
 if(WIN32)
@@ -111,6 +136,7 @@ if(WIN32)
   install(FILES "C:/Program Files/FFmpeg/bin/avformat-58.dll" DESTINATION .)
   install(FILES "C:/Program Files/FFmpeg/bin/swresample-3.dll" DESTINATION .)
 elseif(APPLE)
+<<<<<<< HEAD
   set(CPACK_GENERATOR DragNDrop)
 
   install(TARGETS ${PROJECT_NAME} BUNDLE DESTINATION .)
@@ -123,6 +149,9 @@ elseif(APPLE)
   install(FILES "/usr/local/Cellar/ffmpeg/${FFMPEG_BREW_VERSION}/lib/libavformat.so" DESTINATION "./${PROJECT_NAME}.app/Contents/Resources")
   install(FILES "/usr/local/Cellar/ffmpeg/${FFMPEG_BREW_VERSION}/lib/libavcodec.so" DESTINATION "./${PROJECT_NAME}.app/Contents/Resources")
   install(FILES "/usr/local/Cellar/ffmpeg/${FFMPEG_BREW_VERSION}/lib/libswresample.so" DESTINATION "./${PROJECT_NAME}.app/Contents/Resources")
+=======
+  set(CPACK_GENERATOR Bundle)
+>>>>>>> master
 elseif(UNIX)
   set(CPACK_GENERATOR DEB)
 endif()
@@ -137,6 +166,9 @@ set(CPACK_PACKAGE_VERSION_MAJOR "1")
 set(CPACK_PACKAGE_VERSION_MINOR "0")
 set(CPACK_PACKAGE_VERSION_PATCH "0")
 set(CPACK_PACKAGE_INSTALL_DIRECTORY ${PROJECT_NAME})
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/LICENSE")
+set(CPACK_RESOURCE_FILE_README "${CMAKE_SOURCE_DIR}/README.md")
+set(CPACK_STRIP_FILES TRUE)
 
 # Debian specific
 set(CPACK_DEBIAN_PACKAGE_DEPENDS "qt5-default libavcodec-dev libavdevice-dev libavformat-dev")
