@@ -27,40 +27,40 @@ set(UI_FILES
 )
 
 if(WIN32)
-add_executable(${PROJECT_NAME}
-  WIN32
-  src/main.cpp
-  src/mainwindow.cpp
-  src/mainwindow.h
-  src/stream.cpp
-  src/stream.h
+  add_executable(${PROJECT_NAME}
+    WIN32
+    src/main.cpp
+    src/mainwindow.cpp
+    src/mainwindow.h
+    src/stream.cpp
+    src/stream.h
 
-  ${UI_FILES}
-  ${TS_FILES}
-)
+    ${UI_FILES}
+    ${TS_FILES}
+  )
 elseif(APPLE)
-add_executable(${PROJECT_NAME}
-  MACOSX_BUNDLE
-  src/main.cpp
-  src/mainwindow.cpp
-  src/mainwindow.h
-  src/stream.cpp
-  src/stream.h
+  add_executable(${PROJECT_NAME}
+    MACOSX_BUNDLE
+    src/main.cpp
+    src/mainwindow.cpp
+    src/mainwindow.h
+    src/stream.cpp
+    src/stream.h
 
-  ${UI_FILES}
-  ${TS_FILES}
-)
+    ${UI_FILES}
+    ${TS_FILES}
+  )
 else()
-add_executable(${PROJECT_NAME}
-  src/main.cpp
-  src/mainwindow.cpp
-  src/mainwindow.h
-  src/stream.cpp
-  src/stream.h
+  add_executable(${PROJECT_NAME}
+    src/main.cpp
+    src/mainwindow.cpp
+    src/mainwindow.h
+    src/stream.cpp
+    src/stream.h
 
-  ${UI_FILES}
-  ${TS_FILES}
-)
+    ${UI_FILES}
+    ${TS_FILES}
+  )
 endif()
 
 
@@ -136,22 +136,18 @@ if(WIN32)
   install(FILES "C:/Program Files/FFmpeg/bin/avformat-58.dll" DESTINATION .)
   install(FILES "C:/Program Files/FFmpeg/bin/swresample-3.dll" DESTINATION .)
 elseif(APPLE)
-<<<<<<< HEAD
   set(CPACK_GENERATOR DragNDrop)
 
   install(TARGETS ${PROJECT_NAME} BUNDLE DESTINATION .)
 
   install(CODE 
-    "execute_process(COMMAND \"macdeployqt\" -verbose=2)"
+    "execute_process(COMMAND \"macdeployqt \${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME}.app\" -verbose=2)"
   )
 
   install(FILES "/usr/local/Cellar/ffmpeg/${FFMPEG_BREW_VERSION}/lib/libavutil.so" DESTINATION "./${PROJECT_NAME}.app/Contents/Resources")
   install(FILES "/usr/local/Cellar/ffmpeg/${FFMPEG_BREW_VERSION}/lib/libavformat.so" DESTINATION "./${PROJECT_NAME}.app/Contents/Resources")
   install(FILES "/usr/local/Cellar/ffmpeg/${FFMPEG_BREW_VERSION}/lib/libavcodec.so" DESTINATION "./${PROJECT_NAME}.app/Contents/Resources")
   install(FILES "/usr/local/Cellar/ffmpeg/${FFMPEG_BREW_VERSION}/lib/libswresample.so" DESTINATION "./${PROJECT_NAME}.app/Contents/Resources")
-=======
-  set(CPACK_GENERATOR Bundle)
->>>>>>> master
 elseif(UNIX)
   set(CPACK_GENERATOR DEB)
 endif()
